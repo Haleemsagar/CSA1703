@@ -1,0 +1,45 @@
+# Vacuum Cleaner Problem
+print("haleem sagar")
+class VacuumCleaner:
+    def __init__(self, room):
+        self.room = room
+        self.position = (0, 0)
+        self.cleaned_positions = set()
+
+    def move(self, direction):
+        x, y = self.position
+        if direction == 'up' and x > 0:
+            self.position = (x - 1, y)
+        elif direction == 'down' and x < len(self.room) - 1:
+            self.position = (x + 1, y)
+        elif direction == 'left' and y > 0:
+            self.position = (x, y - 1)
+        elif direction == 'right' and y < len(self.room[0]) - 1:
+            self.position = (x, y + 1)
+
+    def clean(self):
+        self.cleaned_positions.add(self.position)
+
+    def is_cleaned(self):
+        return self.position in self.cleaned_positions
+
+    def run(self, commands):
+        for command in commands:
+            if command in ['up', 'down', 'left', 'right']:
+                self.move(command)
+            elif command == 'clean':
+                self.clean()
+
+# Example usage
+room = [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0]
+]
+
+vacuum = VacuumCleaner(room)
+commands = ['right', 'down', 'clean', 'left', 'clean']
+vacuum.run(commands)
+
+print("Cleaned positions:", vacuum.cleaned_positions)
+print("Current position:", vacuum.position)
