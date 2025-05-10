@@ -1,0 +1,15 @@
+% Facts about the diseases and their recommended diets
+diet_system(diabetes, low_sugar).
+diet_system(high_blood_pressure, low_salt).
+diet_system(heart_disease, low_fat).
+diet_system(arthritis, anti_inflammatory).
+diet_system(obesity, calorie_control).
+
+% Rules to suggest the diet based on disease
+suggest_diet(Disease, Diet) :-
+    diet_system(Disease, Diet),
+    write('For '), write(Disease), write(', you should follow a '), write(Diet), write(' diet.').
+
+% Example Queries:
+% ?- suggest_diet(diabetes, Diet).
+% ?- suggest_diet(heart_disease, Diet).
