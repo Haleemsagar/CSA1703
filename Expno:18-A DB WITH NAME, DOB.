@@ -1,0 +1,5 @@
+% Facts: person(Name, DateOfBirth).
+person('Alice', date(1990, 5, 15)).
+person('Bob', date(1985, 12, 3)).
+person('Charlie', date(2000, 7, 21)).
+person('Diana', date(1995, 9, 9)).
