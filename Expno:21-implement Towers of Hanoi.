@@ -1,0 +1,15 @@
+% The main predicate to solve the Towers of Hanoi
+hanoi(N, Source, Target, Auxiliary) :-
+    move(N, Source, Target, Auxiliary).
+
+% Base case: when there is only one disk, simply move it
+move(1, Source, Target, _) :-
+    write('Move disk 1 from '), write(Source), write(' to '), write(Target), nl.
+
+% Recursive case: move N disks from Source to Target using Auxiliary peg
+move(N, Source, Target, Auxiliary) :-
+    N > 1,
+    M is N - 1,
+    move(M, Source, Auxiliary, Target),     % Move N-1 disks from Source to Auxiliary
+    move(1, Source, Target, _),             % Move the N-th disk from Source to Target
+    move(M, Auxiliary, Target, Source).     % Move N-1 disks from Auxiliary to Target
