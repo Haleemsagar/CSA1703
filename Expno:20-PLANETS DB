@@ -1,0 +1,30 @@
+% Facts
+% planet(Name, Type, DistanceFromSun_MillionKm, Diameter_Km, HasRings).
+
+planet(mercury, terrestrial, 57.9, 4879, no).
+planet(venus, terrestrial, 108.2, 12104, no).
+planet(earth, terrestrial, 149.6, 12742, no).
+planet(mars, terrestrial, 227.9, 6779, no).
+planet(jupiter, gas_giant, 778.5, 139820, yes).
+planet(saturn, gas_giant, 1434, 116460, yes).
+planet(uranus, ice_giant, 2871, 50724, yes).
+planet(neptune, ice_giant, 4495, 49244, yes).
+
+% Rules
+
+% Rule to find all planets with rings
+has_rings(Planet) :-
+    planet(Planet, _, _, _, yes).
+
+% Rule to find all gas giants
+is_gas_giant(Planet) :-
+    planet(Planet, gas_giant, _, _, _).
+
+% Rule to find planets closer than a given distance from the sun
+closer_than(Planet, Distance) :-
+    planet(Planet, _, DistFromSun, _, _),
+    DistFromSun < Distance.
+
+% Rule to get planet info by name
+planet_info(Name, Type, Distance, Diameter, Rings) :-
+    planet(Name, Type, Distance, Diameter, Rings).
