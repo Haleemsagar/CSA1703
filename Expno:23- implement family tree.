@@ -1,0 +1,28 @@
+% Define parent-child relationships
+parent(john, mary).      % John is the parent of Mary
+parent(john, james).     % John is the parent of James
+parent(mary, linda).     % Mary is the parent of Linda
+parent(mary, tim).       % Mary is the parent of Tim
+parent(james, sophia).   % James is the parent of Sophia
+
+% Define gender of family members
+male(john). 
+male(james).
+female(mary).
+female(linda).
+female(tim).
+female(sophia).
+
+% Define sibling relationship
+sibling(X, Y) :- parent(P, X), parent(P, Y), X \= Y.
+
+% Define grandparent relationship
+grandparent(X, Y) :- parent(X, Z), parent(Z, Y).
+
+% Define uncle or aunt relationship
+uncle_or_aunt(X, Y) :- sibling(X, Z), parent(Z, Y), male(X).
+aunt(X, Y) :- uncle_or_aunt(X, Y), female(X).
+uncle(X, Y) :- uncle_or_aunt(X, Y), male(X).
+
+% Define cousin relationship
+cousin(X, Y) :- parent(P1, X), parent(P2, Y), sibling(P1, P2), X \= Y.
