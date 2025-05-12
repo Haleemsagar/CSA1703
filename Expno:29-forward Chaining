@@ -1,0 +1,35 @@
+% Initial known facts (can be updated dynamically)
+:- dynamic fact/1.
+
+fact(fever).
+fact(cough).
+
+% Rules
+rule(cold, [cough, sneezing]).
+rule(flu, [fever, cough, body_ache]).
+rule(covid, [fever, cough, loss_of_taste]).
+
+% Forward chaining mechanism: apply rules to infer new facts
+forward_chain :-
+    rule(Conclusion, Premises),
+    \+ fact(Conclusion),  % if the conclusion is not already known
+    all_true(Premises),
+    assertz(fact(Conclusion)),
+    write('Inferred: '), write(Conclusion), nl,
+    forward_chain.  % repeat until no more conclusions
+
+forward_chain.
+
+% Check if all elements in the list are known facts
+all_true([]).
+all_true([H|T]) :-
+    fact(H),
+    all_true(T).
+
+% Query to show all inferred facts
+show_facts :-
+    write('Known Facts:'), nl,
+    fact(F),
+    write('- '), write(F), nl,
+    fail.
+show_facts.
