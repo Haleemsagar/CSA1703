@@ -1,0 +1,20 @@
+% Facts
+has_feathers(bird).
+lays_eggs(bird).
+flies(bird).
+
+has_fur(mammal).
+gives_milk(mammal).
+
+has_scales(reptile).
+lays_eggs(reptile).
+
+% Rules
+is_animal(X) :- has_feathers(X), lays_eggs(X), flies(X), write('It is a bird'), nl.
+is_animal(X) :- has_fur(X), gives_milk(X), write('It is a mammal'), nl.
+is_animal(X) :- has_scales(X), lays_eggs(X), write('It is a reptile'), nl.
+
+% Query examples
+% ?- is_animal(bird).
+% ?- is_animal(mammal).
+% ?- is_animal(reptile).
