@@ -1,0 +1,44 @@
+% Define dynamic predicates
+:- dynamic(goal/1).
+:- dynamic(heuristic/2).
+
+% Sample graph edges (node1, node2, cost)
+edge(a, b, 1).
+edge(a, c, 3).
+edge(b, d, 1).
+edge(c, d, 1).
+edge(c, e, 6).
+edge(d, f, 2).
+edge(e, f, 2).
+
+% Heuristic values (node, heuristic cost to goal)
+heuristic(a, 6).
+heuristic(b, 4).
+heuristic(c, 5).
+heuristic(d, 2).
+heuristic(e, 6).
+heuristic(f, 0).
+
+% Set goal node
+goal(f).
+
+% Best First Search
+best_first_search(Start, Path) :-
+    goal(Goal),
+    best_first([[Start, 0]], [], Goal, RevPath),
+    reverse(RevPath, Path),
+    format('Path found: ~w~n', [Path]).
+
+% best_first(OpenList, ClosedList, Goal, Path)
+best_first([[Goal, _]|_], _, Goal, [Goal]).
+best_first([[Current, _]|RestOpen], Closed, Goal, [Current|Path]) :-
+    findall(
+        [Next, H],
+        (edge(Current, Next, _), 
+         \+ member([Next, _], RestOpen), 
+         \+ member(Next, Closed),
+         heuristic(Next, H)),
+        Children),
+    append(RestOpen, Children, TempOpen),
+    sort(2, @=<, TempOpen, NewOpen), % sort by heuristic
+    best_first(NewOpen, [Current|Closed], Goal, Path).
