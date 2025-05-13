@@ -1,0 +1,10 @@
+% match(Pattern, List)
+% Succeeds if Pattern matches the List
+
+% Base case: empty pattern matches empty list
+match([], []).
+
+% Recursive case: head of pattern matches head of list, and tail matches recursively
+match([H1|T1], [H2|T2]) :-
+    H1 = H2,
+    match(T1, T2).
