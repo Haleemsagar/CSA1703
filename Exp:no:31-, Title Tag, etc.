@@ -1,0 +1,18 @@
+<!-- Title tag: Normally added in HTML <head> section, shown for learning only -->
+<title>My HTML Demo Blog</title>
+
+<h1>HTML Tag Demonstration</h1>
+
+<h2>Anchor Tag</h2>
+<p>Click this link to visit <a href="https://www.wikipedia.org" target="_blank" title="Go to Wikipedia">Wikipedia</a>.</p>
+
+<h2>Image Tag</h2>
+<p>Here is an image using the <code>&lt;img&gt;</code> tag:</p>
+<img src="https://via.placeholder.com/300" alt="Sample Image" title="Placeholder Image">
+
+<h2>Heading Tags</h2>
+<h3>This is an H3 heading</h3>
+<h4>This is an H4 heading</h4>
+
+<h2>Paragraph Tag</h2>
+<p>This is a simple paragraph to show how the paragraph tag works in HTML.</p>
